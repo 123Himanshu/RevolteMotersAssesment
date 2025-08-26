@@ -1,17 +1,73 @@
-<script type="importmap">
-  {
-    "imports": {
-      "lit": "https://esm.sh/lit@^3.3.0",
-      "lit/": "https://esm.sh/lit@^3.3.0/",
-      "@lit/context": "https://esm.sh/@lit/context@^1.1.5",
-      "@google/genai": "https://esm.sh/@google/genai@^0.9.0",
-      "three": "https://esm.sh/three@^0.176.0",
-      "three/": "https://esm.sh/three@^0.176.0/"
-    }
-  }
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolt Motors AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "lit": "https://esm.sh/lit@^3.3.0",
+          "lit/": "https://esm.sh/lit@^3.3.0/",
+          "@lit/context": "https://esm.sh/@lit/context@^1.1.5",
+          "@google/genai": "https://esm.sh/@google/genai@^0.9.0",
+          "three": "https://esm.sh/three@^0.176.0",
+          "three/": "https://esm.sh/three@^0.176.0/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/index.css">
+</head>
 <body>
-  <gdm-live-audio></gdm-live-audio>
-<script type="module" src="/index.tsx"></script>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo-container">
+                <div class="brand">
+                    <h1>REVOLT</h1>
+                    <span class="brand-accent">MOTORS</span>
+                </div>
+                <p class="tagline">Voice-Enabled Electric Vehicle Assistant</p>
+            </div>
+            <div class="connection-status">
+                <div class="status-indicator"></div>
+                <span class="status-text">AI Ready</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="interaction-container">
+                <div class="visualizer-container">
+                    <div class="visualizer-header">
+                        <h2>Audio Analysis</h2>
+                        <div class="visualizer-legend">
+                            <span class="legend-item"><span class="dot input-dot"></span>Input</span>
+                            <span class="legend-item"><span class="dot output-dot"></span>Response</span>
+                        </div>
+                    </div>
+                    <div class="visualizer-wrapper">
+                        <gdm-live-audio></gdm-live-audio>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="powered-by">Powered by <span class="ai-brand">Gemini AI</span></p>
+                    <p class="copyright">&copy; 2025 Revolt Motors</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#support">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/index.tsx"></script>
 </body>
-<link rel="stylesheet" href="/index.css">
+</html>

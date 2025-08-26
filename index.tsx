@@ -7,7 +7,7 @@
 import {LitElement, css, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 import {createBlob, decode, decodeAudioData} from './utils';
-import './visual-3d';
+import './audio-visualizer';
 
 @customElement('gdm-live-audio')
 export class GdmLiveAudio extends LitElement {
@@ -36,40 +36,120 @@ export class GdmLiveAudio extends LitElement {
       right: 0;
       z-index: 10;
       text-align: center;
+      color: var(--error-color);
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .controls {
       z-index: 10;
       position: absolute;
-      bottom: 10vh;
-      left: 0;
-      right: 0;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 10px;
+      gap: 1.5rem;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
 
       button {
+        position: relative;
         outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: white;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        width: 64px;
-        height: 64px;
+        border: none;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--secondary-bg, #141414);
         cursor: pointer;
-        font-size: 24px;
         padding: 0;
         margin: 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 2px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+          z-index: 0;
+        }
+
+        svg {
+          position: relative;
+          z-index: 1;
+          transition: all 0.3s ease;
+          width: 32px;
+          height: 32px;
+        }
 
         &:hover {
-          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+
+          svg {
+            transform: scale(1.1);
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      #resetButton {
+        background: var(--secondary-bg, #141414);
+        
+        svg {
+          fill: var(--accent-color, #00E676);
+        }
+        
+        &:hover {
+          background: var(--secondary-bg, #141414);
+          
+          svg {
+            fill: var(--accent-hover, #00FF84);
+          }
+        }
+      }
+
+      #startButton {
+        background: var(--accent-color, #00E676);
+        
+        svg circle {
+          fill: #FFFFFF;
+        }
+        
+        &:hover {
+          background: var(--accent-hover, #00FF84);
+        }
+      }
+
+      #stopButton {
+        background: var(--error-color, #FF3D71);
+        
+        svg rect {
+          fill: #FFFFFF;
+        }
+        
+        &:hover {
+          background: #FF5286;
         }
       }
 
       button[disabled] {
-        display: none;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
       }
     }
   `;
@@ -247,48 +327,32 @@ export class GdmLiveAudio extends LitElement {
             id="resetButton"
             @click=${this.reset}
             ?disabled=${this.isRecording}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="40px"
-              viewBox="0 -960 960 960"
-              width="40px"
-              fill="#ffffff">
-              <path
-                d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
             </svg>
           </button>
           <button
             id="startButton"
             @click=${this.startRecording}
             ?disabled=${this.isRecording}>
-            <svg
-              viewBox="0 0 100 100"
-              width="32px"
-              height="32px"
-              fill="#c80000"
-              xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="50" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
             </svg>
           </button>
           <button
             id="stopButton"
             @click=${this.stopRecording}
             ?disabled=${!this.isRecording}>
-            <svg
-              viewBox="0 0 100 100"
-              width="32px"
-              height="32px"
-              fill="#000000"
-              xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="100" height="100" rx="15" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="6" y="6" width="12" height="12" rx="2"/>
             </svg>
           </button>
         </div>
 
         <div id="status"> ${this.error} </div>
-        <gdm-live-audio-visuals-3d
+        <audio-visualizer
           .inputNode=${this.inputNode}
-          .outputNode=${this.outputNode}></gdm-live-audio-visuals-3d>
+          .outputNode=${this.outputNode}></audio-visualizer>
       </div>
     `;
   }
