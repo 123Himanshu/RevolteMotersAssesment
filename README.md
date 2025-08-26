@@ -48,7 +48,7 @@ Follow these steps to get the project up and running on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/himanshu-chaprana/revolt-motors-assessment.git
+git clone https://github.com/himanshu-chaprana/RevoltMotersAssesment.git
 cd revolt-motors-assessment
 ```
 
@@ -57,13 +57,13 @@ cd revolt-motors-assessment
 Navigate into the backend directory and install dependencies:
 
 ```bash
-cd revolt-motors-server
+cd server
 npm install
 ```
 
 ### 3. Configure API Key
 
-Create a `.env` file in the `revolt-motors-server` directory with your Google Gemini API Key:
+Create a `.env` file in the `server` directory with your Google Gemini API Key:
 
 ```
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
@@ -86,11 +86,11 @@ To run the application, you need to start both the backend server and the fronte
 
 ### 1. Start the Backend Server
 
-Open a new terminal, navigate to the `revolt-motors-server` directory, and run:
+Open a new terminal, navigate to the `server` directory, and run:
 
 ```bash
-cd revolt-motors-server
-node index.js
+cd server
+npm start
 ```
 
 This will start the WebSocket server, listening on `http://localhost:3000`.
@@ -100,7 +100,7 @@ This will start the WebSocket server, listening on `http://localhost:3000`.
 Open another new terminal, navigate to the project root directory, and run:
 
 ```bash
-cd .. # If you are still in revolt-motors-server directory
+cd .. # If you are still in server directory
 npm run dev
 ```
 
@@ -110,10 +110,10 @@ This will start the Vite development server and open the application in your def
 
 Once both servers are running and the application is open in your browser:
 
-1.  Click the **red circle button** to start recording your voice.
+1.  Click the **button** to start recording your voice.
 2.  Speak your query. The AI will respond verbally.
 3.  To interrupt the AI while it's speaking, simply start talking again (ensure the recording is still active). The AI will stop its current response and listen to your new input.
 4.  Click the **square button** to stop recording.
-5.  Click the **reset button** (circular arrow) to clear the session and start a new conversation.
+5.  Click the **reset button**  to clear the session and start a new conversation.
 
 Enjoy interacting with your Revolt Motors AI Assistant!
