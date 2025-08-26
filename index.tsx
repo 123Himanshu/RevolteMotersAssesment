@@ -85,9 +85,11 @@ export class GdmLiveAudio extends LitElement {
   }
 
   private initWebSocket() {
+    console.log('Attempting to connect to WebSocket server...');
     this.ws = new WebSocket('ws://localhost:3000');
 
     this.ws.onopen = () => {
+      console.log('WebSocket connection established successfully');
       this.updateStatus('Connected to server');
     };
 
