@@ -166,7 +166,13 @@ export class GdmLiveAudio extends LitElement {
 
   private initWebSocket() {
     console.log('Attempting to connect to WebSocket server...');
-    this.ws = new WebSocket('ws://localhost:3000');
+   const WS_URL =
+  window.location.hostname === "localhost"
+    ? "ws://localhost:3000"
+    : "wss://revoltemotersassesment.onrender.com";
+
+this.ws = new WebSocket(WS_URL);
+
 
     this.ws.onopen = () => {
       console.log('WebSocket connection established successfully');
