@@ -1,0 +1,24 @@
+{
+  "name": "revolt-motors-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Himanshu Chaprana",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.12.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
